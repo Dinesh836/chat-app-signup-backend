@@ -1,5 +1,8 @@
 const user=require('../models/user')
+const Msg=require('../models/msg')
 const bcrypt=require('bcrypt');
+const jwt = require('jsonwebtoken');
+
 
 exports.signup=(req,res)=>{
     //console.log(req);
@@ -49,5 +52,18 @@ exports.login = (req, res) => {
         } else {
             return res.status(404).json({success: false, message: 'email do not match'})
         }
+    })
+}
+
+exports.postmsg=(req, res)=>{
+    const {name, msg, userId} = req.body
+    console.log(req.body)
+
+    Msg.create( { name, msg , userId } )
+    .then((res)=>{
+         res.json({sucess:true , message:'msg added to databasse '})
+    })
+    .catch((err)=>{
+        res.json({sucess:false , message:'unable to store '})
     })
 }
