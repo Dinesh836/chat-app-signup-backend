@@ -9,6 +9,10 @@ router.post('/login',usercontroller.login )
 
 router.post('/postmsg', usercontroller.postmsg)
 
+router.post('/getmsges', usercontroller.getmsges)
+
+router.get('/getusers', usercontroller.getusers)
+
 
 module.exports=router
 

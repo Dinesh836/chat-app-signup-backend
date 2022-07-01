@@ -56,14 +56,35 @@ exports.login = (req, res) => {
 }
 
 exports.postmsg=(req, res)=>{
-    const {name, msg, userId} = req.body
+    const {username, msg, userId , groupid} = req.body
     console.log(req.body)
 
-    Msg.create( { name, msg , userId } )
-    .then((res)=>{
-         res.json({sucess:true , message:'msg added to databasse '})
+    Msg.create( { username, msg , userId , groupid} )
+    .then(()=>{
+       return  res.status(200).json({sucess:true , message:'msg added to databasse '})
     })
     .catch((err)=>{
-        res.json({sucess:false , message:'unable to store '})
+       return  res.status(402).json({sucess:false , message:'unable to store '})
+    })
+}
+
+exports.getmsges=(req, res)=>{
+    const {groupid}=req.body
+    console.log(groupid)
+    Msg.findAll({where : {groupid:groupid}})
+    .then(msges=>{
+        return res.status(200).json({msges, success: true})
+    })
+    .catch((err)=>{
+        return res.status(402).json({ error: err, success: false})
+    })
+}
+exports.getusers=(req, res)=>{
+    user.findAll()
+    .then(users=>{
+        return res.status(200).json({users, success: true})
+    })
+    .catch((err)=>{
+        return res.status(402).json({ error: err, success: false})
     })
 }

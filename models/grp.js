@@ -1,7 +1,7 @@
 const sequelize=require('../utils/database')
 const Sequelize=require('sequelize')
 
-const Message=sequelize.define('msg',{
+const Group=sequelize.define('grp',{
     id:{
         type:Sequelize.INTEGER,
         autoIncrement:true,
@@ -9,15 +9,16 @@ const Message=sequelize.define('msg',{
         allowNull:false
 
     },
-    msg:{
+    groupname:{
         type:Sequelize.STRING,
+        allowNull:false
 
     },
-    username:{
+    users:{
         type:Sequelize.STRING,
-    },
-    groupid:{
-        type:Sequelize.INTEGER,
+        defaultValue: null
     }
+
+    
 })
-module.exports=Message
+module.exports=Group
